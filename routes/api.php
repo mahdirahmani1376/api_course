@@ -18,5 +18,7 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
 });
 
-Route::apiResource('/categories','App\Http\Controllers\Api\CategoryController');
-Route::apiResource('/products','App\Http\Controllers\Api\ProductController');
+Route::group(['middleware' => 'auth:sanctum'],function() {
+    Route::apiResource('/categories', 'App\Http\Controllers\Api\CategoryController');
+    Route::apiResource('/products', 'App\Http\Controllers\Api\ProductController');
+});
